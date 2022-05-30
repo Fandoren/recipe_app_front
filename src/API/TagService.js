@@ -6,6 +6,10 @@ export default class TagService {
         return response
     }
 
+    static async getAllByIds(ids) {
+        return await axios.post("http://localhost:10010/api/v1/tags/list", ids);
+    }
+
     static async getOne(entityId) {
         return await axios.get("http://localhost:10010/api/v1/tags/" + entityId);
     }
