@@ -1,15 +1,40 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, Suspense} from "react";
 import Button from "react-bootstrap/Button"
 import Modal from "react-bootstrap/Modal"
+import TagService from "../../API/TagService";
 import Form from 'react-bootstrap/Form'
 import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
+import { components } from "react-select";
+import { default as ReactSelect } from "react-select";
 
 
 function ProductModalUpdate({show, handleClose, product, setProduct, update, setShow, updateImage}) {
 
     const[imageToDisplay, setImageToDisplay] = useState('data:image/jpeg;base64,' + product.image)
     const[imageData, setImageData] = useState(null);
+    const [optionSelected, setOptionSelected] = useState(null);
+    const [tagOptions, setTagOptions] = useState([])
+    const handleChange = (selected) => {
+        setOptionSelected(selected);
+      };
+
+      useEffect(() => {
+        const fetchTags = async () => {
+            try {
+              const response = await TagService.getAll();
+              const arr = response.data.map((tag) => ({
+                value: tag.entityId,
+                label: tag.name
+              }))
+              setTagOptions(arr);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    
+        fetchTags();
+      }, []);
 
     const undoCnahges = () => {
         setImageToDisplay('');
@@ -36,15 +61,60 @@ function ProductModalUpdate({show, handleClose, product, setProduct, update, set
         setShow(false);
     }
 
+    const Option = (props) => {
+        return (
+          <div>
+            <components.Option {...props}>
+              <input
+                type="checkbox"
+                checked={props.isSelected}
+                onChange={() => null}
+              />{" "}
+              <label>{props.label}</label>
+            </components.Option>
+          </div>
+        );
+      };
+
+    function TagList() {
+        if(tagOptions === undefined) {
+            return <h1>Тэги грузятся</h1>
+        }
+        return (
+          <Form.Group>
+            <Form.Label>Теги</Form.Label>
+            <span
+              data-toggle="popover"
+              data-trigger="focus"
+              data-content="Пожалуйста, выберите теги"
+            >
+              <ReactSelect
+                options={tagOptions}
+                isMulti
+                closeMenuOnSelect={false}
+                hideSelectedOptions={false}
+                components={{
+                  Option,
+                }}
+                onChange={handleChange}
+                allowSelectAll={true}
+                value={optionSelected}
+              />
+            </span>
+          </Form.Group>
+        );
+      }
+      
+
     return (
         <Modal show={show} onHide={undoCnahges}>
             <Modal.Header closeButton>
-                <Modal.Title>Изменение тега</Modal.Title>
+                <Modal.Title>Изменение продукта</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
                     <Form.Group className="product__form__image">
-                        <Form.Label>Изображение тега</Form.Label>
+                        <Form.Label>Изображение продукта</Form.Label>
                         <Form.Control
                             type="file"
                             placeholder="Загрузите изображение"
@@ -55,7 +125,7 @@ function ProductModalUpdate({show, handleClose, product, setProduct, update, set
                         </Container>
                     </Form.Group>
                     <Form.Group className="product__form__name">
-                        <Form.Label>Название тега</Form.Label>
+                        <Form.Label>Название продукта</Form.Label>
                         <Form.Control
                             type="textarea"
                             placeholder="Введите название"
@@ -72,6 +142,9 @@ function ProductModalUpdate({show, handleClose, product, setProduct, update, set
                             onChange={e => setProduct({ ...product, description: e.target.value })}
                         />
                     </Form.Group>
+                    <Suspense>
+                        <TagList/>
+                    </Suspense>
                 </Form>
             </Modal.Body>
             <Modal.Footer>

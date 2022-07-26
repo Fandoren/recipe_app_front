@@ -37,9 +37,6 @@ function ProductId() {
       ) : (
         <Col>
           <Row>
-            <h1>EntityId: {product.entityId}</h1>
-          </Row>
-          <Row>
             <h3>{product.name}</h3>
           </Row>
           <Row>
@@ -53,7 +50,13 @@ function ProductId() {
               <Button onClick={() => navigate("/tags/" + tag.entityId)} variant='outline-secondary'>{tag.name}</Button>)}
           </Row>
           <Row>
-            <h4>{product.description}</h4>
+            <h4>Описание</h4>
+            {product.description}
+          </Row>
+          <Row>
+            <h4>
+              Рецепты с данным продуктом:
+            </h4>
           </Row>
         </Col>
       )}
