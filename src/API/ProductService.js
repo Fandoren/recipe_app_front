@@ -15,6 +15,10 @@ export default class ProductService {
         return await axios.get("http://localhost:10010/api/v1/products/tags/" + entityId);
     }
 
+    static async getAllByIds(entityIds) {
+        return await axios.post("http://localhost:10010/api/v1/products/list", entityIds)
+    }
+
     static async getPage(pageId) {
         return await axios.get("http://localhost:10010/api/v1/products/page/" + pageId);
     }

@@ -3,9 +3,11 @@ import About from "../pages/About";
 import NotFound from "../pages/NotFound";
 import Tags from "../pages/Tags";
 import Products from "../pages/Products";
+import Recipes from "../pages/Recipes";
 import {Route, Routes} from "react-router-dom";
-import TagId from "../pages/TagId";
-import ProductId from "../pages/ProductId";
+import TagId from "./tags/TagId";
+import ProductId from "./products/ProductId";
+import RecipeId from "./recipes/RecipeId";
 
 function AppRouter() {
     return (
@@ -16,7 +18,8 @@ function AppRouter() {
         <Route exact path="/tags/:id" element={<TagId/>}/>
         <Route exact path="/products" element={<Products/>}/>
         <Route exact path="/products/:id" element={<ProductId/>}/>
-        <Route path="/recipes" element={<Tags/>}/>
+        <Route exact path="/recipes" element={<Recipes/>}/>
+        <Route exact path="/recipes/:id" element={<RecipeId/>}/>
         <Route path="*" element={<NotFound/>}/>
     </Routes>
     )

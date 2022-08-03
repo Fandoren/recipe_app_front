@@ -12,7 +12,7 @@ function ProductButtonGroup({item, remove, update, updateImage}) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const[product, setproduct] = useState({entityId: item.entityId, name: item.name, description: item.description, image: item.imageAsByteArray});
+    const[product, setproduct] = useState({entityId: item.entityId, name: item.name, description: item.description, image: item.imageAsByteArray, tagIds: item.tagIds});
 
     return (
         <ButtonGroup vertical>

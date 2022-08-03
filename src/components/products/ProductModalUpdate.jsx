@@ -28,6 +28,7 @@ function ProductModalUpdate({show, handleClose, product, setProduct, update, set
                 label: tag.name
               }))
               setTagOptions(arr);
+              setOptionSelected(arr.filter(option => product.tagIds.includes(option.value)));
             } catch (error) {
                 console.log(error)
             }

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import Container from 'react-bootstrap/Container'
 import { useParams } from 'react-router-dom';
-import TagService from "../API/TagService";
-import ProductService from "../API/ProductService";
-import { useFetching } from "../hooks/useFetching";
-import Loader from "../UI/Loader/Loader";
+import TagService from "../../API/TagService";
+import ProductService from "../../API/ProductService";
+import { useFetching } from "../../hooks/useFetching";
+import Loader from "../../UI/Loader/Loader";
 import Image from 'react-bootstrap/Image'
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";

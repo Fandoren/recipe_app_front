@@ -6,7 +6,7 @@ function ProductList({products, remove, update, updateImage}) {
     if(!products.length) {
         return (
         <h1 style={{textAlign: "center"}}>
-            Теги не найдены!
+            Продукты не найдены!
         </h1>
         )
     }
