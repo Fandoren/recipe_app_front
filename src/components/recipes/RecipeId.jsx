@@ -82,7 +82,9 @@ function RecipeId() {
       return (recipe.steps.map(step => 
           <Col lg="4">
             <Row>
-              <b>{step.title}</b>
+              <Container className="image__modal__container">
+                <Image width="350" height="250" className='recipe__modal__image' src={step.image}/>
+              </Container>
             </Row>
             <Row>
               {step.description}

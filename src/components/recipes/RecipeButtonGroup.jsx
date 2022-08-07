@@ -4,7 +4,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup"
 import {useNavigate} from "react-router-dom";
 import RecipeModalUpdate from "./RecipeModalUpdate";
 
-function RecipeButtonGroup({item, remove, update, updateImage}) {
+function RecipeButtonGroup({item, remove, update, updateImage, products, tagOptions}) {
 
     const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ function RecipeButtonGroup({item, remove, update, updateImage}) {
             <Button variant="primary" onClick={handleShow}>
                 Изменить
             </Button>
-            <RecipeModalUpdate show={show} handleClose={handleClose} recipe={recipe} setRecipe={setRecipe} update={update} updateImage={updateImage} setShow={setShow}/>
+            <RecipeModalUpdate show={show} handleClose={handleClose} recipe={recipe} setRecipe={setRecipe} update={update} updateImage={updateImage} products={products} tagOptions={tagOptions} setShow={setShow}/>
             <Button onClick={() => remove(item)} variant='primary'>Удалить</Button>
         </ButtonGroup>
     )

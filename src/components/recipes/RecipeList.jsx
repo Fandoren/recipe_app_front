@@ -2,7 +2,7 @@ import React from "react";
 import RecipeItem from './RecipeItem'
 import Row from 'react-bootstrap/Row'
 
-function RecipeList({recipes, remove, update, updateImage}) {
+function RecipeList({recipes, remove, update, updateImage, products, tagOptions}) {
     if(recipes === undefined || !recipes.length) {
         return (
         <h1 style={{textAlign: "center"}}>
@@ -16,7 +16,7 @@ function RecipeList({recipes, remove, update, updateImage}) {
             <h1 style={{textAlign: "center"}}>Список рецептов</h1>
             <Row className="recipe__list__content">
                 {recipes.map((recipe) => 
-                <RecipeItem remove={remove} update={update} updateImage={updateImage} recipe={recipe} key={recipe.entityId}/>)}
+                <RecipeItem remove={remove} update={update} updateImage={updateImage} recipe={recipe} key={recipe.entityId} products={products} tagOptions={tagOptions}/>)}
             </Row>
         </div>
     );

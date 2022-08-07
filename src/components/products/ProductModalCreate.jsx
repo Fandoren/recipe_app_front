@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Suspense } from "react";
 import Modal from "react-bootstrap/Modal";
-import TagService from "../../API/TagService";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
@@ -8,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import { components } from "react-select";
 import { default as ReactSelect } from "react-select";
 
-function ProductModalCreate({ create }) {
+function ProductModalCreate({ create, tagOptions }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -24,25 +23,6 @@ function ProductModalCreate({ create }) {
   const [imageData, setImageData] = useState(null);
   const [imageToDisplay, setImageToDisplay] = useState("");
   const [optionSelected, setOptionSelected] = useState(null);
-  const [tagOptions, setTagOptions] = useState([])
-  
-
-  useEffect(() => {
-    const fetchTags = async () => {
-        try {
-          const response = await TagService.getAll();
-          const arr = response.data.map((tag) => ({
-            value: tag.entityId,
-            label: tag.name
-          }))
-          setTagOptions(arr);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    fetchTags();
-  }, []);
 
   const addNewProduct = () => {
     const tagIds = optionSelected.map((option) => option.value)

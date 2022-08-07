@@ -1,7 +1,6 @@
-import React, {useState, useEffect, Suspense} from "react";
+import React, {useState, Suspense} from "react";
 import Button from "react-bootstrap/Button"
 import Modal from "react-bootstrap/Modal"
-import TagService from "../../API/TagService";
 import Form from 'react-bootstrap/Form'
 import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
@@ -9,33 +8,14 @@ import { components } from "react-select";
 import { default as ReactSelect } from "react-select";
 
 
-function ProductModalUpdate({show, handleClose, product, setProduct, update, setShow, updateImage}) {
+function ProductModalUpdate({show, handleClose, product, setProduct, update, setShow, updateImage, tagOptions}) {
 
     const[imageToDisplay, setImageToDisplay] = useState('data:image/jpeg;base64,' + product.image)
     const[imageData, setImageData] = useState(null);
     const [optionSelected, setOptionSelected] = useState(null);
-    const [tagOptions, setTagOptions] = useState([])
     const handleChange = (selected) => {
         setOptionSelected(selected);
       };
-
-      useEffect(() => {
-        const fetchTags = async () => {
-            try {
-              const response = await TagService.getAll();
-              const arr = response.data.map((tag) => ({
-                value: tag.entityId,
-                label: tag.name
-              }))
-              setTagOptions(arr);
-              setOptionSelected(arr.filter(option => product.tagIds.includes(option.value)));
-            } catch (error) {
-                console.log(error)
-            }
-        }
-    
-        fetchTags();
-      }, []);
 
     const undoCnahges = () => {
         setImageToDisplay('');
@@ -51,12 +31,25 @@ function ProductModalUpdate({show, handleClose, product, setProduct, update, set
 
     const updateProduct = () => {
         if (imageData) {
-            updateImage(product.entityId, imageData)
+          updateImage(product.entityId, imageData)
+        } else {
+          fetch(imageToDisplay)
+          .then(res => res.blob())
+          .then(blob => {
+            const fd = new FormData();
+            const file = new File([blob], "filename.jpeg");
+            fd.append('image', file);
+            updateImage(product.entityId, fd)
+          })
+          
         }
+        const tagIds = optionSelected.map((option) => option.value)
         const newproduct = {
             entityId: product.entityId,
+            image: product.image,
             name: product.name,
-            description: product.description
+            description: product.description,
+            tagIds: tagIds
         }
         update(newproduct)
         setShow(false);

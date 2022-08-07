@@ -1,8 +1,6 @@
-import React, {useState, useEffect, Suspense} from "react";
+import React, {useState, Suspense} from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import TagService from "../../API/TagService";
-import ProductService from "../../API/ProductService";
 import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
@@ -10,9 +8,10 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import { components } from "react-select";
 import { default as ReactSelect } from "react-select";
+import {toBase64} from "../utils/toBase64";
 
 
-function RecipeModalUpdate({show, handleClose, recipe, setRecipe, update, setShow, updateImage}) {
+function RecipeModalUpdate({show, handleClose, recipe, setRecipe, update, setShow, updateImage, products, tagOptions}) {
 
     const units = [
         {value: 'GRAM', label: 'Граммы'},
@@ -25,7 +24,6 @@ function RecipeModalUpdate({show, handleClose, recipe, setRecipe, update, setSho
 
     const [steps, setSteps] = useState(recipe.steps);
     const [ingredients, setIngredients] = useState(recipe.ingredients);
-    const [products, setProductOptions] = useState([]);
     const [hours, setHours] = useState(Math.floor(recipe.cookingTime / 60));
     const [minutes, setMinutes] = useState(recipe.cookingTime % 60);
     const [prepHours, setPrepHours] = useState(Math.floor(recipe.prepTime / 60));
@@ -33,43 +31,10 @@ function RecipeModalUpdate({show, handleClose, recipe, setRecipe, update, setSho
     const [imageToDisplay, setImageToDisplay] = useState('data:image/jpeg;base64,' + recipe.image)
     const [imageData, setImageData] = useState(null);
     const [optionSelected, setOptionSelected] = useState(null);
-    const [tagOptions, setTagOptions] = useState([])
 
     const handleChange = (selected) => {
         setOptionSelected(selected);
       };
-
-    useEffect(() => {
-        const fetchTags = async () => {
-            try {
-              const response = await TagService.getAll();
-              const arr = response.data.map((tag) => ({
-                value: tag.entityId,
-                label: tag.name
-              }))
-              setTagOptions(arr);
-              setOptionSelected(arr.filter(option => recipe.tagIds.includes(option.value)));
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        const fetchProducts = async () => {
-            try {
-              const response = await ProductService.getAll();
-              const arr = response.data.map((product) => ({
-                value: product.entityId,
-                label: product.name
-              }))
-              setProductOptions(arr);
-            } catch (error) {
-                console.log(error)
-            }
-        }
-    
-        fetchTags();
-        fetchProducts();
-    }, []);
 
     const undoCnahges = () => {
         setImageToDisplay('');
@@ -86,6 +51,15 @@ function RecipeModalUpdate({show, handleClose, recipe, setRecipe, update, setSho
     const updateRecipe = () => {
         if (imageData) {
             updateImage(recipe.entityId, imageData)
+        }  else {
+            fetch(imageToDisplay)
+            .then(res => res.blob())
+            .then(blob => {
+              const fd = new FormData();
+              const file = new File([blob], "filename.jpeg");
+              fd.append('image', file);
+              updateImage(recipe.entityId, fd)
+            })
         }
 
         const tagIds = optionSelected.map((option) => option.value)
@@ -110,7 +84,7 @@ function RecipeModalUpdate({show, handleClose, recipe, setRecipe, update, setSho
       //Steps
 
     function addStep() {
-        let newStep = { title: '', description: ''};
+        let newStep = { image: '', description: ''};
         setSteps([...steps, newStep]);
     }
 
@@ -119,6 +93,12 @@ function RecipeModalUpdate({show, handleClose, recipe, setRecipe, update, setSho
         data[index][event.target.name] = event.target.value;
         setSteps(data);
     }
+
+    async function handleStepImageChange (index, file) {
+        let data = [...steps];
+        data[index]['image'] = await toBase64(file);
+        await setSteps(data);
+      }
 
     const handleDeleteStep = (index) => {
         let data = [...steps];
@@ -337,27 +317,28 @@ function RecipeModalUpdate({show, handleClose, recipe, setRecipe, update, setSho
                     {steps.map((step, index) => {
                     return (
                         <Col key={"step-" + index} lg="6">
-                        <Form.Group>
-                            <Form.Label>Введите оглавление шага {index + 1}</Form.Label>
-                            <Form.Control
-                            type="textarea"
-                            placeholder="Введите оглавление"
-                            value={step.title}
-                            name="title"
-                            onChange={(e) => handleStepsChange(index, e)}
-                            />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Введите описание шага</Form.Label>
-                            <Form.Control
-                            type="textarea"
-                            placeholder="Введите описание"
-                            value={step.description}
-                            name="description"
-                            onChange={(e) => handleStepsChange(index, e)}
-                            />
-                        </Form.Group>
-                        <Button onClick={() => handleDeleteStep(index)} variant="danger">Удалить шаг {index + 1}</Button>
+                            <Form.Group className="recipe__form__image">
+                                <Form.Label>Изображение для шага</Form.Label>
+                                <Form.Control
+                                type="file"
+                                placeholder="Загрузите изображение"
+                                onChange={(e) => handleStepImageChange(index, e.target.files[0])}
+                                />
+                                <Container className="image__modal__container">
+                                    <Image width="350" height="250" className='recipe__modal__image' src={step.image}/>
+                                </Container>
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Введите описание шага</Form.Label>
+                                <Form.Control
+                                type="textarea"
+                                placeholder="Введите описание"
+                                value={step.description}
+                                name="description"
+                                onChange={(e) => handleStepsChange(index, e)}
+                                />
+                            </Form.Group>
+                            <Button onClick={() => handleDeleteStep(index)} variant="danger">Удалить шаг {index + 1}</Button>
                         </Col>
                     )
                 })}

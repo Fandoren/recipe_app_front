@@ -23,6 +23,11 @@ export default class ProductService {
         return await axios.get("http://localhost:10010/api/v1/products/page/" + pageId);
     }
 
+    static async getPageFilterByIds(pageId, entityIds) {
+        console.log(entityIds)
+        return await axios.post("http://localhost:10010/api/v1/products/page/" + pageId, entityIds)
+    }
+
     static async save(product) {
         const response = await axios.post("http://localhost:10010/api/v1/products", product);
         return response

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, Suspense } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -6,12 +6,11 @@ import Image from "react-bootstrap/Image";
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from "react-bootstrap/Container";
-import ProductService from "../../API/ProductService";
-import TagService from "../../API/TagService";
 import { components } from "react-select";
 import { default as ReactSelect } from "react-select";
+import {toBase64} from "../utils/toBase64";
 
-function RecipeModalCreate({ create }) {
+function RecipeModalCreate({ create, products, tagOptions }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -37,15 +36,13 @@ function RecipeModalCreate({ create }) {
     {value: 'PIECE', label: 'Часть'}
   ];
 
-  const [steps, setSteps] = useState([{title: '', description: ''}]);
+  const [steps, setSteps] = useState([{image: '', description: ''}]);
   const [ingredients, setIngredients] = useState([{productId: '', weight: 0, unit: ''}]);
-  const [products, setProductOptions] = useState([]);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [prepHours, setPrepHours] = useState(0);
   const [prepMinutes, setPrepMinutes] = useState(0);
   const [optionSelected, setOptionSelected] = useState(null);
-  const [tagOptions, setTagOptions] = useState([])
   const [imageData, setImageData] = useState(null);
   const [imageToDisplay, setImageToDisplay] = useState("");
 
@@ -54,72 +51,44 @@ function RecipeModalCreate({ create }) {
   const [caloriesError, setCaloriesError] = useState(false);
 
   const addNewRecipe = () => {
-    const tagIds = optionSelected.map((option) => option.value)
-
-    const newRecipe = {
-      name: recipe.name,
-      description: recipe.description,
-      ingredients: ingredients,
-      cookingTime: (parseInt(hours) * 60) + parseInt(minutes),
-      prepTime: (parseInt(prepHours) * 60) + parseInt(prepMinutes),
-      calories: parseInt(recipe.calories),
-      steps: steps,
-      tagIds: tagIds,
-      author: recipe.author
-    };
-    create(newRecipe, imageData);
-    setRecipe({
-      name: "",
-      description: "",
-      image: null,
-      ingredients: [],
-      cookingTime: 0,
-      prepTime: 0,
-      calories: 0,
-      steps: [],
-      tagIds: [],
-      author: ""
-    });
-    setIngredients([]);
-    setSteps([]);
-    setHours(0);
-    setMinutes(0);
-    setPrepHours(0);
-    setPrepMinutes(0);
-    setOptionSelected(null);
-    setShow(false);
-  };
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-        try {
-          const response = await ProductService.getAll();
-          const arr = response.data.map((product) => ({
-            value: product.entityId,
-            label: product.name
-          }))
-          setProductOptions(arr);
-        } catch (error) {
-            console.log(error)
-        }
+    if(ingredientError || timeError || caloriesError) {
+      console.log("Исправьте введеннёые данные")
+    } else {
+      const tagIds = optionSelected.map((option) => option.value)
+      const newRecipe = {
+        name: recipe.name,
+        description: recipe.description,
+        ingredients: ingredients,
+        cookingTime: (parseInt(hours) * 60) + parseInt(minutes),
+        prepTime: (parseInt(prepHours) * 60) + parseInt(prepMinutes),
+        calories: parseInt(recipe.calories),
+        steps: steps,
+        tagIds: tagIds,
+        author: recipe.author
+      };
+      create(newRecipe, imageData);
+      setRecipe({
+        name: "",
+        description: "",
+        image: '',
+        ingredients: [],
+        cookingTime: 0,
+        prepTime: 0,
+        calories: 0,
+        steps: [],
+        tagIds: [],
+        author: ""
+      });
+      setIngredients([]);
+      setSteps([]);
+      setHours(0);
+      setMinutes(0);
+      setPrepHours(0);
+      setPrepMinutes(0);
+      setOptionSelected(null);
+      setShow(false);
     }
-
-    const fetchTags = async () => {
-      try {
-        const response = await TagService.getAll();
-        const arr = response.data.map((tag) => ({
-          value: tag.entityId,
-          label: tag.name
-        }))
-        setTagOptions(arr);
-      } catch (error) {
-          console.log(error)
-      }
-  }
-
-    fetchTags();
-    fetchProducts();
-  }, []);
+  };
 
   const uploadImage = (file) => {
     const imageData = new FormData();
@@ -131,7 +100,7 @@ function RecipeModalCreate({ create }) {
   //Steps
 
   function addStep() {
-    let newStep = { title: '', description: ''};
+    let newStep = { image: '', description: ''};
     setSteps([...steps, newStep]);
   }
 
@@ -139,6 +108,12 @@ function RecipeModalCreate({ create }) {
     let data = [...steps];
     data[index][event.target.name] = event.target.value;
     setSteps(data);
+  }
+
+  async function handleStepImageChange (index, file) {
+    let data = [...steps];
+    data[index]['image'] = await toBase64(file);
+    await setSteps(data);
   }
 
   const handleDeleteStep = (index) => {
@@ -375,15 +350,16 @@ function RecipeModalCreate({ create }) {
             {steps.map((step, index) => {
               return (
                 <Col key={"step-" + index} lg="6">
-                  <Form.Group>
-                    <Form.Label>Введите оглавление шага {index + 1}</Form.Label>
+                  <Form.Group className="recipe__form__image">
+                    <Form.Label>Изображение для шага</Form.Label>
                     <Form.Control
-                      type="textarea"
-                      placeholder="Введите оглавление"
-                      value={step.title}
-                      name="title"
-                      onChange={(e) => handleStepsChange(index, e)}
+                      type="file"
+                      placeholder="Загрузите изображение"
+                      onChange={(e) => handleStepImageChange(index, e.target.files[0])}
                     />
+                      <Container className="image__modal__container">
+                        <Image width="350" height="250" className='recipe__modal__image' src={step.image}/>
+                      </Container>
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Введите описание шага</Form.Label>

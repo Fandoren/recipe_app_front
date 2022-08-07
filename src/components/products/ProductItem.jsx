@@ -26,7 +26,7 @@ function ProductItem(props) {
                     <Card.Title className='product__title'>{props.product.name}</Card.Title>
                     <Card.Text className='product__description'>{desc}</Card.Text>
                 </Card.Body>
-                <ProductButtonGroup remove={props.remove} update={props.update} item={props.product} updateImage={props.updateImage}/>
+                <ProductButtonGroup remove={props.remove} update={props.update} item={props.product} updateImage={props.updateImage} tagOptions={props.tagOptions}/>
             </Card>
         </Col>
     )

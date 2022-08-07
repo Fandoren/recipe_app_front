@@ -16,6 +16,14 @@ export default class RecipeService {
         return await axios.get("http://localhost:10010/api/v1/recipes/page/" + pageId);
     }
 
+    static async getPageFilteredByProductsAndTags(pageId, arr) {
+        return await axios.post("http://localhost:10010/api/v1/recipes/page/" + pageId, arr);
+    }
+
+    static async getByProductIdIn(entityId) {
+        return await axios.get("http://localhost:10010/api/v1/recipes/products/" + entityId);
+    }
+
     static async save(recipe) {
         const response = await axios.post("http://localhost:10010/api/v1/recipes", recipe);
         return response

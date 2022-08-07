@@ -4,7 +4,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup"
 import {useNavigate} from "react-router-dom";
 import ProductModalUpdate from "./ProductModalUpdate";
 
-function ProductButtonGroup({item, remove, update, updateImage}) {
+function ProductButtonGroup({item, remove, update, updateImage, tagOptions}) {
 
     const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ function ProductButtonGroup({item, remove, update, updateImage}) {
             <Button variant="primary" onClick={handleShow}>
                 Изменить
             </Button>
-            <ProductModalUpdate show={show} handleClose={handleClose} product={product} setProduct={setproduct} update={update} updateImage={updateImage} setShow={setShow}/>
+            <ProductModalUpdate show={show} handleClose={handleClose} product={product} setProduct={setproduct} update={update} updateImage={updateImage} tagOptions={tagOptions} setShow={setShow}/>
             <Button onClick={() => remove(item)} variant='primary'>Удалить</Button>
         </ButtonGroup>
     )

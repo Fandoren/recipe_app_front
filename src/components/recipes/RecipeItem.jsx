@@ -26,7 +26,7 @@ function RecipeItem(props) {
                     <Card.Title className='recipe__title'>{props.recipe.name}</Card.Title>
                     <Card.Text className='recipe__description'>{desc}</Card.Text>
                 </Card.Body>
-                <RecipeButtonGroup remove={props.remove} update={props.update} item={props.recipe} updateImage={props.updateImage}/>
+                <RecipeButtonGroup remove={props.remove} update={props.update} item={props.recipe} updateImage={props.updateImage} products={props.products} tagOptions={props.tagOptions}/>
             </Card>
         </Col>
     )

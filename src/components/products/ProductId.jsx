@@ -3,6 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { useParams } from "react-router-dom";
 import ProductService from "../../API/ProductService";
+import RecipeService from "../../API/RecipeService";
 import { useFetching } from "../../hooks/useFetching";
 import Loader from "../../UI/Loader/Loader";
 import Image from "react-bootstrap/Image";
@@ -15,6 +16,7 @@ function ProductId() {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [tags, setTags] = useState([]);
+  const [recipes, setRecipes] = useState([]);
   const [fetchProductById, isProductLoading, productError] = useFetching(
     async () => {
       const responseProduct = await ProductService.getOne(id);
@@ -23,6 +25,10 @@ function ProductId() {
         responseProduct.data.tagIds
       );
       setTags(responseTag.data);
+      const responseRecipe = await RecipeService.getByProductIdIn(
+        responseProduct.data.entityId
+      );
+      setRecipes(responseRecipe.data);
     }
   );
 
@@ -57,6 +63,11 @@ function ProductId() {
             <h4>
               Рецепты с данным продуктом:
             </h4>
+            {recipes.map((recipe) => 
+              <Row>
+                <Button onClick={() => navigate("/recipes/" + recipe.entityId)} variant='outline-secondary'>{recipe.name}</Button>
+              </Row>
+            )}
           </Row>
         </Col>
       )}

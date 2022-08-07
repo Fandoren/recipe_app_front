@@ -26,6 +26,15 @@ function TagModalUpdate({show, handleClose, tag, setTag, update, setShow, update
     const updateTag = () => {
         if (imageData) {
             updateImage(tag.entityId, imageData)
+        } else {
+            fetch(imageToDisplay)
+            .then(res => res.blob())
+            .then(blob => {
+              const fd = new FormData();
+              const file = new File([blob], "filename.jpeg");
+              fd.append('image', file);
+              updateImage(tag.entityId, fd)
+            })
         }
         const newTag = {
             entityId: tag.entityId,
