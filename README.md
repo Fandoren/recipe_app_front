@@ -18,5 +18,6 @@
 
 * Open `recipe-app-front` folder with VS Code
 * Open project terminal in VS Code.
-* In terminal write command `npm start` and wait.
+* In terminal write command `npm install` and wait.
+* After successfull completion, run command `npm start`
 * Once frontend will be launched you will see message like `webpack compiled with 1 warning` and the page will automatically open in the browser

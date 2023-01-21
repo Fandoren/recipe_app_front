@@ -222,11 +222,11 @@ function Recipes() {
                 </Suspense>
                 <Button onClick={() => {handleSearch(page)}}>Фильтрация</Button>
             </Row>
-            <RecipeModalCreate create={createRecipe} products={products} tagOptions={tagOptions}/>
+            <RecipeModalCreate create={createRecipe} products={productOptions} tagOptions={tagOptions}/>
             {RecipeError && <h1>Произошла ошибка ${RecipeError}</h1>}
             {isRecipesLoading
             ? <div style={{display: 'flex', justifyContent: 'center', marginTop: '10px'}}><Loader/></div>
-            : <RecipeList update={updateRecipe} updateImage={updateImage} remove={removeRecipe} recipes={recipes} products={products} tagOptions={tagOptions}/>
+            : <RecipeList update={updateRecipe} updateImage={updateImage} remove={removeRecipe} recipes={recipes} products={productOptions} tagOptions={tagOptions}/>
             }
             <ButtonPages pagesArray={pagesArray} page={page} setPage={changePage}/>
         </Container>
