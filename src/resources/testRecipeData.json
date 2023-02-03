@@ -1,0 +1,68 @@
+[
+    {
+      "entityId": "63cbfbad950f6a3a831ef3bc",
+      "name": "Какое-то блюдо",
+      "imageAsByteArray": null,
+      "ingredients": [
+        {
+          "productId": "62eab96b9e357804249abb57",
+          "weight": 100,
+          "unit": "GLASS"
+        },
+        {
+          "productId": "62eab9ff9e357804249abb5a",
+          "weight": 123,
+          "unit": "MILLILITER"
+        }
+      ],
+      "cookingTime": 50,
+      "prepTime": 20,
+      "calories": 300,
+      "description": "Описание основного блюда",
+      "steps": [
+        {
+          "image": "string",
+          "description": "Описание шага 1"
+        },
+        {
+          "image": "string",
+          "description": "Описание шага 2"
+        }
+      ],
+      "tagIds": [
+        "62eab79f9e357804249abb4e"
+      ],
+      "author": "Автор"
+    },
+    {
+      "entityId": "63cbff4fe15c612aa2b8372c",
+      "name": "Крутое блюдо",
+      "imageAsByteArray": null,
+      "ingredients": [
+        {
+          "productId": "62eac8169e357804249abb65",
+          "weight": 100,
+          "unit": "GRAM"
+        },
+        {
+          "productId": "62eac7d69e357804249abb63",
+          "weight": 100,
+          "unit": "GRAM"
+        }
+      ],
+      "cookingTime": 0,
+      "prepTime": 10,
+      "calories": 50,
+      "description": "очень вкусна",
+      "steps": [
+        {
+          "image": "",
+          "description": "Первый шаг. Объединяй и ешь "
+        }
+      ],
+      "tagIds": [
+        "62eab79f9e357804249abb4e"
+      ],
+      "author": ""
+    }
+  ]

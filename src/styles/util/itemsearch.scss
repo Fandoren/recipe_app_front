@@ -1,0 +1,19 @@
+.search-text {
+    font-size: 26px;
+}
+
+.name-input {
+    max-width: 600px;
+}
+
+.search-button {
+    @include button-variant(
+        #0A695E,
+        #FFF
+    );
+}
+
+.name-input-field {
+    border-color: #0A695E;
+    border-width: 2px;
+}

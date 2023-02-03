@@ -1,0 +1,37 @@
+$primary: #0A695E;
+
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+@import "./itemcard.scss";
+@import "./navbar.scss";
+@import "./itemsearch.scss";
+@import "./advanceditemsearch.scss";
+ 
+ .row {
+   padding: 0;
+   margin: 0;
+ }
+ .col {
+   padding: 0;
+   margin: 0;
+ }
+ .container {
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+ }
+
+ .button-transparent {
+  @include button-variant(
+    transparent,
+    transparent,
+    #fff,
+    transparent,
+    transparent,
+    #000,
+    transparent,
+    transparent,
+    transparent,
+    transparent,
+  );
+}

@@ -1,0 +1,52 @@
+.advanced-search-box {
+    margin-top: 5px !important;
+}
+
+.advanced-search-form {
+    .product-name-input {
+        .product-name-input-field {
+            border-color: #0A695E;
+            border-width: 1px;
+        }
+    }
+    .product-amount-input {
+        .product-amount-input-field {
+            border-color: #0A695E;
+            border-width: 1px;
+        }
+    }
+    .product-unit-input {
+        .product-unit-input-field {
+            border-color: #0A695E;
+            border-width: 1px;
+        }
+    }
+}
+
+.advanced-search-item {
+    margin-top: 10px !important;
+}
+
+.advanced-search-item-text {
+    font-size: 18px;
+}
+
+.delete-button {
+    @include button-variant(
+        #c20000,
+        #FFF
+    );
+    border-radius: 5px;
+}
+
+.circle-button {
+    width: 40px;
+    height: 40px;
+    padding: 6px 0px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.advanced-search-add-item {
+    margin-top: 5px !important;
+}

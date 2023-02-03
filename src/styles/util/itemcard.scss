@@ -1,0 +1,100 @@
+.item {
+    cursor: pointer;
+    width: 350px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+// Head styles
+
+.item-head {
+    position: relative;
+    height: 66%;
+    &:hover .item-head-description-box {
+        opacity: 0.8;
+    }
+    &:hover .item-head-description-text {
+        opacity: 1;
+    }
+}
+
+.item-head-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.item-head-image-text {
+    position: absolute;
+    bottom: 10px;
+    left: 5px;
+    color: #fff;
+    font-size: 24px;
+    text-shadow: #000 1px 0 1px;
+}
+
+.item-head-description-box {
+    text-align: center;
+    background-color: #666666;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    -webkit-transition: all 300ms ease-out;
+    transition: all 300ms ease-out;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.item-head-description-text {
+    opacity: 0;
+    transition-delay: 0.2s;
+    transition-duration: 0.3s;
+    transition: all 300ms ease-out;
+}
+
+//Body styles
+
+.item-body {
+    max-height: 34%;
+    background-color: #70B6AE;
+}
+
+.item-body-text {
+    color: #fff;
+    font-size: 12px;
+}
+
+.item-body-info {
+    height: 51px;
+}
+
+.item-body-tags {
+    height: 51px;
+}
+
+.item-body-tag {
+    @include button-variant(
+        #c6e2df,
+        #000
+    );
+    @include button-size(
+        5px,
+        0px,
+        12px,
+        20px
+    );
+    background-color: #fff;
+    border-color: #000;
+    width: 100%;
+    max-width: 101.66px;
+    margin-top: 10.5px;
+}
+
+.item-body-tag-col {
+    margin: 0px 7.5px !important;
+}
