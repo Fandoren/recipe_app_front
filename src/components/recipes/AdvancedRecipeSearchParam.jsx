@@ -2,7 +2,8 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Row, Col, Button, Form } from 'react-bootstrap';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-function AdvancedSearchParam() {
+
+function AdvancedRecipeSearchParam({deleteFunction}) {
   return (
     <Row className="advanced-search-item justify-content-center">
         <Col xs={3} className="product-name-input">
@@ -48,7 +49,7 @@ function AdvancedSearchParam() {
             </Row>
         </Col>
       <Col xs={1} className="product-delete-button">
-            <Button className="delete-button">
+            <Button className="delete-button" onClick={deleteFunction}>
                 <FontAwesomeIcon icon={faTrashCan} />
             </Button>
       </Col>
@@ -56,4 +57,4 @@ function AdvancedSearchParam() {
   );
 }
 
-export default AdvancedSearchParam;
+export default AdvancedRecipeSearchParam;

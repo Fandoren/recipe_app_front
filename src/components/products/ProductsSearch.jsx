@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 
-function ItemSearch() {
+function ProductsSearch() {
 
     return(
         <Container className='search-box'>
             <Row className='search-text text-center'>
-                <span>Введите название блюда</span>
+                <span>Введите название интересующего Вас продукта</span>
             </Row>
             <Form className='search-form'>
                 <Row className='justify-content-center'>
@@ -25,4 +25,4 @@ function ItemSearch() {
 
 }
 
-export default ItemSearch;
+export default ProductsSearch;

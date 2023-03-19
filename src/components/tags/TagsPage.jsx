@@ -1,13 +1,13 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import RecipesPage from '../recipes/RecipesPage';
+import TagsSearch from './TagsSearch';
 
-function MainPage() {
+function TagsPage() {
     return(
         <Container>
-            <RecipesPage/>
+            <TagsSearch/>
         </Container>
     )
 }
 
-export default MainPage;
+export default TagsPage;
