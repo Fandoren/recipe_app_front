@@ -11,10 +11,10 @@ function NavBar() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="nav-items ms-auto justify-content-start">
-                        <Nav.Link className="nav-item" to="/recipes">Рецепты</Nav.Link>
-                        <Nav.Link className="nav-item" to="/products">Продукты</Nav.Link>
-                        <Nav.Link className="nav-item" to="/tags">Теги</Nav.Link>
-                        <Nav.Link className="nav-item" to="/calculate">Калькулятор питания</Nav.Link>
+                        <Nav.Link as={Link} className="nav-item" to="/recipes">Рецепты</Nav.Link>
+                        <Nav.Link as={Link} className="nav-item" to="/products">Продукты</Nav.Link>
+                        <Nav.Link as={Link} className="nav-item" to="/tags">Теги</Nav.Link>
+                        <Nav.Link as={Link} className="nav-item" to="/calculate">Калькулятор питания</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
                         <Nav.Link>

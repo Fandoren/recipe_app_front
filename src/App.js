@@ -1,9 +1,8 @@
 import React from 'react';
-import ItemCard from './components/util/ItemCard';
 import NavBar from './components/util/NavBar';
 import { BrowserRouter } from "react-router-dom";
+import AppRouter from './components/util/AppRouter';
 import "./styles/util/style.scss";
-import MainPage from './components/util/MainPage';
 
 function App() {
 
@@ -13,7 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar/>
-      <MainPage/>
+      <AppRouter/>
     </BrowserRouter>
   );
 }
