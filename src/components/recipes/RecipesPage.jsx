@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import RecipesSearch from './RecipesSearch';
 import AdvancedRecipeSearch from './AdvancedRecipeSearch';
-import data from '../../resources/testProductData.json'
+import data from '../../resources/testRecipeData.json'
 import SearchResults from '../util/SearchResults';
 
 function RecipesPage() {

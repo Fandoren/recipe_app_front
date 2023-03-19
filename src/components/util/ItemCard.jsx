@@ -13,8 +13,8 @@ function ItemCard({item}) {
             return (
                 <Row className="item-body-tags">
                     {item.tagIds.map((tag) => 
-                        <Col className="item-body-tag-col" key={tag}>
-                            <Button className="item-body-tag" key={tag}>
+                        <Col className="item-body-tag-col" key={"TagCol-" + item.entityId + "-" + tag}>
+                            <Button className="item-body-tag" key={"TagBtn-" + item.entityId + "-" + tag}>
                                 {TruncateString(tag, 7)}
                             </Button>
                         </Col>

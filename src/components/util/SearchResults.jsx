@@ -4,13 +4,11 @@ import ItemCard from './ItemCard';
 
 function SearchResults({items}) {
 
-    items.map((item) => console.log(item.entityId))
-
     return(
         <Container className='results-box'>
-            <Row>
+            <Row className='justify-content-center'>
                 {items.map((item) => 
-                    <Col xs={12} md={4} xl={3}>
+                    <Col key={"ItemCol-" + item.entityId} xs="auto">
                         <ItemCard key={item.entityId} item={item}/>
                     </Col>
                 )}
