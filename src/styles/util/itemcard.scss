@@ -2,7 +2,8 @@
     cursor: pointer;
     width: 350px;
     height: 300px;
-    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px #00000040;
+    border-radius: 5px;
     overflow: hidden;
     padding: 0;
     margin: 0;
@@ -61,12 +62,18 @@
 
 .item-body {
     max-height: 34%;
-    background-color: #70B6AE;
+    background-color: #ffffff;
 }
 
 .item-body-text {
-    color: #fff;
+    color: #000000;
     font-size: 12px;
+}
+
+.item-body-text-item {
+    border-style: none dashed;
+    border-color: #00000044;
+    border-width: 1px;
 }
 
 .item-body-info {
@@ -79,7 +86,7 @@
 
 .item-body-tag {
     @include button-variant(
-        #c6e2df,
+        #ffffff,
         #000
     );
     @include button-size(
@@ -97,4 +104,11 @@
 
 .item-body-tag-col {
     margin: 0px 7.5px !important;
+}
+
+.item-image-carousel {
+    -moz-box-shadow: 0 0 5px 5px #444;
+    -webkit-box-shadow: 0 0 5px 5px#444;
+    box-shadow: 0 0 5px 5px #444;
+    background-color: #444;
 }

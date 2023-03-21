@@ -6,7 +6,7 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import { TruncateString, isEmpty } from "../../js/Utils";
 
-function ItemCard({item}) {
+function ItemCard({item, click}) {
     function TagsComponent() {
         if (item.tagIds) {
             //AJAX запрос для получения имён тэгов
@@ -27,14 +27,14 @@ function ItemCard({item}) {
     function InfoComponent() {
         if (item.cookingTime || item.prepTime || item.author || item.calories) {
             return (
-                <Row className="item-body-info">
-                    <Col>
+                <Row className="item-body-info text-center">
+                    <Col className="item-body-text-item">
                         <span className="item-body-text">Время готовки: {isEmpty(item.cookingTime + item.prepTime)} минут</span>
                     </Col>
-                    <Col>
+                    <Col className="item-body-text-item">
                         <span className="item-body-text">Кол-во калорий: {isEmpty(item.calories)}</span>
                     </Col>
-                    <Col>
+                    <Col className="item-body-text-item">
                         <span className="item-body-text">Автор: {isEmpty(item.author)}</span>
                     </Col>
                 </Row>
@@ -43,7 +43,7 @@ function ItemCard({item}) {
     }
 
     return (
-        <Container className="item">
+        <Container className="item" onClick={() => click(item)}>
             <Row className="item-head">
                 <Image
                     className="item-head-image p-0" 

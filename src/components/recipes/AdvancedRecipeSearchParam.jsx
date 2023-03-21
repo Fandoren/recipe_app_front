@@ -5,7 +5,7 @@ import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 function AdvancedRecipeSearchParam({deleteFunction}) {
   return (
-    <Row className="advanced-search-item justify-content-center">
+    <Row className="advanced-search-item align-items-center justify-content-center">
         <Col xs={3} className="product-name-input">
             <Row className="align-items-center">
                 <Col xs={3}>

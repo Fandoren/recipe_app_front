@@ -1,0 +1,32 @@
+.image-preview-col {
+    position: relative;
+    &:hover .image-preview-controls {
+        opacity: 0.8;
+    }
+}
+
+.image-preview {
+    object-fit: cover;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.image-preview-controls {
+    text-align: center;
+    background-color: #666666;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    -webkit-transition: all 300ms ease-out;
+    transition: all 300ms ease-out;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.image-preview-buttons {
+    position : absolute;
+    bottom: 0;
+    width: 100%;
+}

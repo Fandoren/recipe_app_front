@@ -1,6 +1,14 @@
 .navbar {
-    background-color: #0A695E;
+    background-color: #000000;
     color: #fff;
+}
+
+.navbar-brand {
+    margin-left: 10px;
+    color: rgba(255, 255, 255);
+    &:hover {
+        color:rgb(173, 255, 228);
+    }
 }
 
 .nav-items {
@@ -11,6 +19,12 @@
 .nav-item {
     margin: 0px 1%;
     color: #fff;
+    &:hover {
+        color:rgb(173, 255, 228);
+    }
+    &:focus,&:active {
+        color: rebeccapurple;
+    }
     font-size: 16px;
     width: auto;
 }
@@ -21,4 +35,7 @@
 
 .button-exit {
     min-width: 150px;
+    &:hover {
+        color: #fff;
+    }
 }

@@ -1,4 +1,4 @@
-$primary: #0A695E;
+@import "./boostrapOverrides.scss";
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 
@@ -7,6 +7,12 @@ $primary: #0A695E;
 @import "./itemsearch.scss";
 @import "./advanceditemsearch.scss";
 @import "./searchresults.scss";
+@import "./profile.scss";
+@import "./labelitem.scss";
+@import "./createForm.scss";
+@import "./imagePreview.scss";
+
+@import "../recipes/recipePage.scss";
  
  .row {
    padding: 0;

@@ -1,13 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import { Container, Navbar, Nav, Button, Row, Col } from "react-bootstrap";
+import { Container, Navbar, Nav, Button } from "react-bootstrap";
 
 function NavBar() {
 
     return(
         <Navbar expand="md">
             <Container>
-                <Navbar.Brand to="/about">Лого</Navbar.Brand>
+                <Navbar.Brand href="/about">Рецептовик</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="nav-items ms-auto justify-content-start">
@@ -17,14 +17,10 @@ function NavBar() {
                         <Nav.Link as={Link} className="nav-item" to="/calculate">Калькулятор питания</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
-                        <Nav.Link>
-                            <Button className="button-profile button-transparent">
-                                Личный кабинет
-                            </Button>
-                            <Button className="button-exit button-transparent">
+                        <Nav.Link as={Link} className="nav-item text-center" to="/profile">Личный кабинет</Nav.Link>
+                        <Button className="button-exit button-transparent">
                                 Выход
-                            </Button>
-                        </Nav.Link>
+                        </Button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

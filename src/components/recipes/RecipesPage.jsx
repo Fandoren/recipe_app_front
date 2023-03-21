@@ -1,11 +1,19 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
+import {useNavigate} from "react-router-dom";
 import RecipesSearch from './RecipesSearch';
 import AdvancedRecipeSearch from './AdvancedRecipeSearch';
 import data from '../../resources/testRecipeData.json'
 import SearchResults from '../util/SearchResults';
 
 function RecipesPage() {
+
+    const navigate = useNavigate();
+
+    function showRecipe(recipe) {
+        navigate("/recipes/" + recipe.entityId);
+    }
+
     return(
         <Container>
             <RecipesSearch/>
@@ -15,7 +23,7 @@ function RecipesPage() {
                 </span>
             </Row>
             <AdvancedRecipeSearch/>
-            <SearchResults items={data}/>
+            <SearchResults items={data} clickFunction={showRecipe}/>
         </Container>
     )
 }
