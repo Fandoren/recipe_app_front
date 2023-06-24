@@ -25,22 +25,24 @@ function ImageInputPreview({images, setImages}) {
     function ImagePreview () {
         if (images && images.length > 0) {
             return (
-                <Row className="image-preview-row">
+                <Row>
                     {Array.from(images).map((image) => 
-                        <Col className="image-preview-col" xs={4} lg={3} key={"ImagePreviewCol-" + image.name + "-" + image.size}>
-                            <Image 
-                                className='image-preview'
-                                src={URL.createObjectURL(image)}
-                            />
-                            <div className="image-preview-controls">
-                                <Row className="image-preview-buttons">
-                                    <Col>
-                                        <Button onClick={() => deleteImage(image)} className='delete-button'>
-                                            <FontAwesomeIcon icon={faTrashCan}/> Удалить
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </div>
+                        <Col className="image-preview-col align-self-center" xs={4} lg={3} key={"ImagePreviewCol-" + image.name + "-" + image.size}>
+                            <Row className="justify-content-center p-0">
+                                <Image 
+                                    className='image-preview'
+                                    src={URL.createObjectURL(image)}
+                                />
+                                <div className="image-preview-controls">
+                                    <Row className="image-preview-buttons">
+                                        <Col>
+                                            <Button onClick={() => deleteImage(image)} className='delete-button fade-button'>
+                                                <FontAwesomeIcon icon={faTrashCan}/> Удалить
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                </div>
+                            </Row>
                         </Col>
                     )}
                 </Row>
