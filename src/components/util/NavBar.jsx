@@ -1,27 +1,37 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import { Container, Navbar, Nav, Button } from "react-bootstrap";
+import { Container, Navbar, Nav, Button, Col, Row } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+
 
 function NavBar() {
 
     return(
         <Navbar expand="md">
-            <Container>
-                <Navbar.Brand href="/about">Рецептовик</Navbar.Brand>
+            <Container fluid>
+                <Navbar.Brand href="/about" className="header2-bold align-middle">Рецептовик</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="nav-items ms-auto justify-content-start">
-                        <Nav.Link as={Link} className="nav-item" to="/recipes">Рецепты</Nav.Link>
-                        <Nav.Link as={Link} className="nav-item" to="/products">Продукты</Nav.Link>
-                        <Nav.Link as={Link} className="nav-item" to="/tags">Теги</Nav.Link>
-                        <Nav.Link as={Link} className="nav-item" to="/calculate">Калькулятор питания</Nav.Link>
-                    </Nav>
-                    <Nav className="ms-auto">
-                        <Nav.Link as={Link} className="nav-item text-center" to="/profile">Личный кабинет</Nav.Link>
-                        <Button className="button-exit button-transparent">
-                                Выход
-                        </Button>
-                    </Nav>
+                    <Row className="flex-fill">
+                        <Col>
+                            <Nav className="nav-items justify-content-center">
+                                <Nav.Link as={Link} className="nav-item header3-bold" to="/recipes">Рецепты</Nav.Link>
+                                <Nav.Link as={Link} className="nav-item header3-bold" to="/products">Продукты</Nav.Link>
+                                <Nav.Link as={Link} className="nav-item header3-bold" to="/tags">Теги</Nav.Link>
+                                <Nav.Link as={Link} className="nav-item header3-bold" to="/calculate">Калькулятор питания</Nav.Link>
+                            </Nav>
+                        </Col>
+                        <Col className="col-2">
+                            <Nav>
+                                <Nav.Link to="/profile">
+                                    <Button className="button-profile" >
+                                        <FontAwesomeIcon icon={faUser}/> Личный кабинет
+                                    </Button>
+                                </Nav.Link>
+                            </Nav>
+                        </Col>                                        
+                    </Row>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

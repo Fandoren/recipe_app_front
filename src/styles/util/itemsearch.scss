@@ -8,12 +8,12 @@
 
 .search-button {
     @include button-variant(
-        #000000,
+        $secondary,
         #FFF
     );
 }
 
 .name-input-field {
-    border-color: #000000;
+    border-color: $secondary;
     border-width: 2px;
 }

@@ -14,21 +14,21 @@
 
 @import "../recipes/recipePage.scss";
  
- .row {
+.row {
    padding: 0;
    margin: 0;
- }
- .col {
+}
+.col {
    padding: 0;
    margin: 0;
- }
- .container {
+}
+.container {
   padding: 0;
   margin: 0;
   max-width: 100%;
- }
+}
 
- .button-transparent {
+.button-transparent {
   @include button-variant(
     transparent,
     transparent,
@@ -41,4 +41,14 @@
     transparent,
     transparent,
   );
+}
+
+.header2-bold {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.header3-bold {
+  font-size: 27px;
+  font-weight: bold;
 }
