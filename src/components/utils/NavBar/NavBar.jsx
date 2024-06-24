@@ -10,7 +10,7 @@ export default function NavBar() {
   return (
     <Navbar className={styles.navbar_main} expand="lg">
       <Container className={styles.container_main} fluid>
-        <Navbar.Brand className={styles.brand_text} href="#home">
+        <Navbar.Brand className={styles.brand_text} href="/">
           <h2>Рецептовик</h2>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -20,18 +20,18 @@ export default function NavBar() {
         >
           <Container>
             <Nav className="align-items-center">
-              <Nav.Link className={`${styles.link_text} mx-1`} href="#recipes">
+              <Nav.Link className={`${styles.link_text} mx-1`} href="/recipes">
                 Рецепты
               </Nav.Link>
-              <Nav.Link className={`${styles.link_text} mx-1`} href="#products">
+              <Nav.Link className={`${styles.link_text} mx-1`} href="/products">
                 Продукты
               </Nav.Link>
-              <Nav.Link className={`${styles.link_text} mx-1`} href="#section">
+              <Nav.Link className={`${styles.link_text} mx-1`} href="/section">
                 Разделы
               </Nav.Link>
               <Nav.Link
                 className={`${styles.link_text} mx-1`}
-                href="#calculator"
+                href="/calculator"
               >
                 Калькулятор питания
               </Nav.Link>
