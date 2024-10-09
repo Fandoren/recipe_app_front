@@ -1,7 +1,7 @@
-import AppRouter from "components/utils/AppRouter/AppRouter";
-import Footer from "components/utils/Footer/Footer";
-import NavBar from "components/utils/NavBar/NavBar";
 import { BrowserRouter } from "react-router-dom";
+import AppRouter from "@/AppRouter";
+import NavBar from "@/components/NavBar/NavBar";
+import Footer from "@/components/Footer/Footer";
 
 function App() {
   return (
