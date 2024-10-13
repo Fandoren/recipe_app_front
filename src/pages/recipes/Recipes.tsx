@@ -1,7 +1,10 @@
-export default function AppRouter() {
+
+const Recipes = function () {
   return (
-    <div className=" text-center bg-darkblue text-darkblue-foreground">
+    <>
       Страница рецептов
-    </div>
+    </>
   );
-}
+};
+
+export default Recipes;
